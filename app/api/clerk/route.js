@@ -1,5 +1,5 @@
 import { Webhook } from "svix";
-import {connectionDB} from "@/context/db";
+import connectionDB from "@/context/db"
 import userModel from "@/models/user/user";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
