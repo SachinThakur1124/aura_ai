@@ -1,5 +1,5 @@
 import { Webhook } from "svix";
-import connectionDB from "@/context/db";
+import {connectionDB} from "@/context/db";
 import userModel from "@/models/user/user";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
@@ -9,6 +9,7 @@ export const POST = async (req) => {
   const headerPayload = await headers();
   const svixHeaders = {
     "svix-id": headerPayload.get("svix-id"),
+    "svix-timestamp": headerPayload.get("svix-timestamp"),
     "svix-signature": headerPayload.get("svix-signature"),
   };
   // GET the payload and verify it...
