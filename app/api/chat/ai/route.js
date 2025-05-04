@@ -6,7 +6,10 @@ import chatModel from "@/models/chat/Chat";
 import connectionDB from "@/context/db";
 
 // Initialize OpenAI client with your API key
-const client = new OpenAI(process.env.CHAT_GPT_API_KEY);
+const client = new OpenAI({
+  baseURL: "https://api.deepseek.com",
+  apiKey: process.env.CHAT_GPT_API_KEY,
+});
 
 export async function POST(req) {
   try {
@@ -38,8 +41,9 @@ export async function POST(req) {
     chat.messages.push(userPrompt);
     // call the OpenAI API to get the response
     const response = await client.chat.completions.create({
-      model: "gpt-3.5-turbo",
+      model: "deepseek-chat",
       messages: [{ role: "user", content: prompt }],
+      store: true,
     });
 
     const message = response.choices[0].message;
